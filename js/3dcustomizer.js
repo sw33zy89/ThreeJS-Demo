@@ -5,7 +5,7 @@ const TRAY = document.getElementById('js-tray-slide');
 
 var theModel;
 
-const MODEL_PATH = "assets/audi-r8-2.glb";
+const MODEL_PATH = "assets/audi-r8.glb";
 
 var loaded = false;
 var cameraFar = 5;
@@ -102,24 +102,20 @@ camera.position.x = 0;
 // Initial material
 const INITIAL_MTL = new THREE.MeshPhongMaterial( { color: 0xf1f1f1, shininess: 10} );
 
-const GLASS_MTL = new THREE.MeshStandardMaterial({
+const GLASS_MTL = new THREE.MeshPhysicalMaterial({
         color: 0x000000, 
        // envMap: refractionCube, 
-        refractionRatio: 0.5,
-		shininess: 90,
+        refractionRatio: 0.8,
         opacity: 0.6,
 		reflectivity: 0.8, 
         transparent: true
     });
-	
-const MIRROR_MTL = new THREE.MeshBasicMaterial( { color: 0xffffff, envMap: scene.background } );
 
 const INITIAL_MAP = [
 	{childID: "primary_panel", mtl: INITIAL_MTL},
 	{childID: "accent_panel", mtl: INITIAL_MTL},
 	{childID: "brakes", mtl: INITIAL_MTL},
-	{childID: "glass", mtl: GLASS_MTL},
-	{childID: "mirrors", mtl: GLASS_MTL}
+	{childID: "glass", mtl: GLASS_MTL}
 ];
 
 // Init the object loader
@@ -127,14 +123,12 @@ var loader = new THREE.GLTFLoader();
 
 
 loader.load(MODEL_PATH, function(object) {
-	console.log(object);
   theModel = object.scene;
 
   theModel.traverse((o) => {
-	  console.log(o);
      if (o.isMesh) {
        o.castShadow = true;
-       o.receiveShadow = true;
+	   
      }
    });
 
@@ -184,8 +178,8 @@ var dirLight = new THREE.DirectionalLight( 0xffffff, 0.54 );
     dirLight.castShadow = true;
     dirLight.shadow.mapSize = new THREE.Vector2(1024, 1024);
 // Add directional Light to scene    
-    scene.add( dirLight );
-
+scene.add( dirLight );
+	
 // Floor
 var floorGeometry = new THREE.PlaneGeometry(5000, 5000, 1, 1);
 var floorMaterial = new THREE.MeshPhongMaterial({
