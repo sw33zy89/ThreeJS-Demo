@@ -15,8 +15,7 @@ const colors = [
 	{
         texture: 'assets/textures/jetstreamblue_flake.png',
         size: [100,100,100],
-        shininess: 0,
-		metal: true
+		shininess: 60
     },
 	{
         texture: 'assets/textures/friction_orange_flake.png',
@@ -24,33 +23,9 @@ const colors = [
         shininess: 60
     },
     {
-        texture: 'assets/textures/wood_.jpg',
-        size: [2,2,2],
-        shininess: 60
-    },
-    {
-        texture: 'assets/textures/fabric_.jpg',
-        size: [4, 4, 4],
-        shininess: 0
-    },
-    {
-        texture: 'assets/textures/pattern_.jpg',
-        size: [8, 8, 8],
-        shininess: 10
-    },
-    {
-        texture: 'assets/textures/denim_.jpg',
-        size: [3, 3, 3],
-        shininess: 0
-    },
-    {
-        texture: 'assets/textures/quilt_.jpg',
-        size: [6, 6, 6],
-        shininess: 0
-    },
-    {
         color: '000000',
-		shininess: 100
+		shininess: 100,
+		metal: true
     },
     {
         color: 'e1a80d',
@@ -58,7 +33,6 @@ const colors = [
     },
     {
         color: '93050b',
-		shininess: 90,
 		metal: true
     },
     {
@@ -103,11 +77,11 @@ camera.position.x = 0;
 const INITIAL_MTL = new THREE.MeshPhongMaterial( { color: 0xf1f1f1, shininess: 10} );
 
 const GLASS_MTL = new THREE.MeshPhysicalMaterial({
-        color: 0x000000, 
+        color: 0x444444, 
        // envMap: refractionCube, 
         refractionRatio: 0.8,
         opacity: 0.6,
-		reflectivity: 0.8, 
+		reflectivity: 0.6, 
         transparent: true
     });
 
